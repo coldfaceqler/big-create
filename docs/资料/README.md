@@ -45,7 +45,7 @@
 - `InsQABench_arxiv2501.10943.pdf`——中文保险问答基线
 - `Non_LLM_Methods_for_RAG_Evaluation_vf.pdf`——用条款编号做确定性评估（本项目金标思路的来源）
 - `OmniEval_EMNLP2025.pdf`——金融 RAG 评估，说明"检索生成不可直接当结论"
-- `拉瓦尔_Quebec保险LLM基准_arxiv2603.07825.pdf`——RAG 会伤弱模型，风险警示
+- `拉瓦尔_Quebec保险LLM基准_arxiv2603.07825.pdf`——RAG 效果因模型而异，部分模型存在性能退化风险
 
 ### 行业数据/
 

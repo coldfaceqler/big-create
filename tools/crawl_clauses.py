@@ -13,7 +13,7 @@
 - 下载到 docs/资料/条款库/，并写一份 _下载清单.csv 记录来源与结果。
 - 只依赖 Python 标准库，无需安装任何包。
 """
-import os, re, ssl, time, csv, urllib.request, urllib.parse
+import os, re, time, csv, urllib.request, urllib.parse
 
 # ---------------------------------------------------------------------------
 # 相关性关键词：命中任一即认为与本项目相关
@@ -37,7 +37,6 @@ OUT_DIR = os.path.join(BASE, "docs", "资料", "条款库")
 LOG_PATH = os.path.join(OUT_DIR, "_下载清单.csv")
 
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36"}
-CTX = ssl._create_unverified_context()  # 部分官网证书配置不规范，仅对下载放宽校验
 
 
 def relevant(name, url):
@@ -54,9 +53,9 @@ def safe_name(name):
 
 def download(name, url):
     req = urllib.request.Request(url, headers=UA)
-    data = urllib.request.urlopen(req, timeout=60, context=CTX).read()
+    data = urllib.request.urlopen(req, timeout=60).read()
     if data[:4] != b"%PDF":
-        return None, f"非 PDF（头部 {data[:16]!r}）"
+        raise ValueError(f"非 PDF（头部 {data[:16]!r}）")
     path = os.path.join(OUT_DIR, safe_name(name) + ".pdf")
     with open(path, "wb") as f:
         f.write(data)
